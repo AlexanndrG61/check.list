@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            margin: 15px; 
+            background: #0f1923; 
+            color: #ece8e1;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a242f;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        h2 {
+            text-align: center;
+            color: #ff4655;
+            margin-bottom: 25px;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #25313f;
+            border-radius: 8px;
+            border-left: 4px solid #ff4655;
+        }
+        .check-number {
+            background: #ff4655;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .check-content {
+            flex-grow: 1;
+        }
+        .check-question {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ece8e1;
+            line-height: 1.4;
+        }
+        .check-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .btn-group {
+            display: flex;
+            gap: 8px;
+        }
+        .btn {
+            padding: 6px 12px;
+            border: 2px solid #ff4655;
+            background: transparent;
+            color: #ece8e1;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .btn:hover {
+            background: #ff4655;
+            color: white;
+        }
+        .btn.selected {
+            background: #ff4655;
+            color: white;
+        }
+        .notes-input {
+            flex-grow: 1;
+            min-width: 200px;
+            padding: 8px;
+            border: 2px solid #394b5a;
+            background: #1a242f;
+            color: #ece8e1;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .notes-input::placeholder {
+            color: #7a8a9a;
+        }
+        .rating {
+            display: flex;
+            gap: 5px;
+        }
+        .rating-btn {
+            width: 32px;
+            height: 32px;
+            border: 2px solid #ff4655;
+            background: transparent;
+            color: #ece8e1;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .rating-btn:hover,
+        .rating-btn.selected {
+            background: #ff4655;
+            color: white;
+        }
+        @media (max-width: 600px) {
+            .check-actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .notes-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>⚡ ФАСТ-ЧЕК НА ЗАХОД В СДЕЛКУ</h2>
+    
+    <div class="check-item">
+        <div class="check-number">1</div>
+        <div class="check-content">
+            <div class="check-question">Есть ли нарратив + формация на 15м/1ч?</div>
+            <div class="check-actions">
+                <div class="btn-group">
+                    <button class="btn" onclick="toggleSelection(this)">Да</button>
+                    <button class="btn" onclick="toggleSelection(this)">Нет</button>
+                </div>
+                <input type="text" class="notes-input" placeholder="Какая формация?">
+            </div>
+        </div>
+    </div>
+
+    <div class="check-item">
+        <div class="check-number">2</div>
+        <div class="check-content">
+            <div class="check-question">Есть ли трейды 100к+ и Natr 2+?</div>
+            <div class="check-actions">
+                <div class="btn-group">
+                    <button class="btn" onclick="toggleSelection(this)">Да</button>
+                    <button class="btn" onclick="toggleSelection(this)">Нет</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="check-item">
+        <div class="check-number">3</div>
+        <div class="check-content">
+            <div class="check-question">Находится ли зона в Premium/Discount?</div>
+            <div class="check-actions">
+                <div class="btn-group">
+                    <button class="btn" onclick="toggleSelection(this)">Premium</button>
+                    <button class="btn" onclick="toggleSelection(this)">Discount</button>
+                    <button class="btn" onclick="toggleSelection(this)">Внутри</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="check-item">
+        <div class="check-number">4</div>
+        <div class="check-content">
+            <div class="check-question">Четкая зона для подбора и фиксации 15/5m?</div>
+            <div class="check-actions">
+                <div class="btn-group">
+                    <button class="btn" onclick="toggleSelection(this)">Да</button>
+                    <button class="btn" onclick="toggleSelection(this)">Нет</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="check-item">
+        <div class="check-number">5</div>
+        <div class="check-content">
+            <div class="check-question">Есть ли риск ревард 1к3?</div>
+            <div class="check-actions">
+                <div class="btn-group">
+                    <button class="btn" onclick="toggleSelection(this)">Да</button>
+                    <button class="btn" onclick="toggleSelection(this)">Нет</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="check-item">
+        <div class="check-number">6</div>
+        <div class="check-content">
+            <div class="check-question">В данной формации я буду входить от:</div>
+            <div class="check-actions">
+                <div class="btn-group">
+                    <button class="btn" onclick="toggleSelection(this)">A. 1го касания</button>
+                    <button class="btn" onclick="toggleSelection(this)">B. Свипа в зоне</button>
+                    <button class="btn" onclick="toggleSelection(this)">C. Выноса зоны</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="check-item">
+        <div class="check-number">7</div>
+        <div class="check-content">
+            <div class="check-question">Мое состояние по 10-балльной, делаю ли я это на эмоциях?</div>
+            <div class="check-actions">
+                <div class="rating">
+                    <button class="rating-btn" onclick="toggleRating(this)">1</button>
+                    <button class="rating-btn" onclick="toggleRating(this)">2</button>
+                    <button class="rating-btn" onclick="toggleRating(this)">3</button>
+                    <button class="rating-btn" onclick="toggleRating(this)">4</button>
+                    <button class="rating-btn" onclick="toggleRating(this)">5</button>
+                    <button class="rating-btn" onclick="toggleRating(this)">6</button>
+                    <button class="rating-btn" onclick="toggleRating(this)">7</button>
+                    <button class="rating-btn" onclick="toggleRating(this)">8</button>
+                    <button class="rating-btn" onclick="toggleRating(this)">9</button>
+                    <button class="rating-btn" onclick="toggleRating(this)">10</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleSelection(btn) {
+    // Снимаем выделение с других кнопок в группе
+    const group = btn.parentElement;
+    const buttons = group.querySelectorAll('.btn');
+    buttons.forEach(b => b.classList.remove('selected'));
+    
+    // Выделяем текущую кнопку
+    btn.classList.add('selected');
+}
+
+function toggleRating(btn) {
+    // Снимаем выделение со всех кнопок рейтинга
+    const group = btn.parentElement;
+    const buttons = group.querySelectorAll('.rating-btn');
+    buttons.forEach(b => b.classList.remove('selected'));
+    
+    // Выделяем текущую кнопку
+    btn.classList.add('selected');
+}
+</script>
+</body>
+</html>
