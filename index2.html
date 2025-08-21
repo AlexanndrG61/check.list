@@ -5,66 +5,103 @@
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, sans-serif; 
-            margin: 15px; 
-            background: #0f1923; 
+            margin: 0;
+            padding: 20px;
+            background: #0f1923;
             color: #ece8e1;
         }
         .container {
-            max-width: 800px;
+            max-width: 1400px;
             margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
             padding: 20px;
             background: #1a242f;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
-        h2 {
-            text-align: center;
+        h1 {
             color: #ff4655;
-            margin-bottom: 25px;
-            font-size: 24px;
+            margin: 0;
+            font-size: 28px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
-        .check-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            padding: 15px;
-            background: #25313f;
-            border-radius: 8px;
+        .deals-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .deal-card {
+            background: #1a242f;
+            border-radius: 12px;
+            padding: 20px;
             border-left: 4px solid #ff4655;
+            position: relative;
         }
-        .check-number {
+        .delete-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
             background: #ff4655;
             color: white;
-            width: 28px;
-            height: 28px;
+            border: none;
+            border-radius: 6px;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .delete-btn:hover {
+            background: #ff2e46;
+        }
+        .deal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #2a3b4d;
+            padding-right: 30px;
+        }
+        .deal-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff4655;
+        }
+        .deal-number {
+            background: #ff4655;
+            color: white;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            margin-right: 15px;
-            flex-shrink: 0;
         }
-        .check-content {
-            flex-grow: 1;
+        .check-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #25313f;
+            border-radius: 8px;
         }
         .check-question {
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #ece8e1;
             line-height: 1.4;
+            font-size: 14px;
         }
         .check-actions {
             display: flex;
-            gap: 15px;
-            align-items: center;
+            gap: 10px;
             flex-wrap: wrap;
-        }
-        .btn-group {
-            display: flex;
-            gap: 8px;
+            margin-bottom: 10px;
         }
         .btn {
             padding: 6px 12px;
@@ -73,7 +110,7 @@
             color: #ece8e1;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 12px;
             transition: all 0.2s;
         }
         .btn:hover {
@@ -84,32 +121,38 @@
             background: #ff4655;
             color: white;
         }
+        .notes-container {
+            margin-top: 10px;
+        }
         .notes-input {
-            flex-grow: 1;
-            min-width: 200px;
+            width: 100%;
             padding: 8px;
             border: 2px solid #394b5a;
             background: #1a242f;
             color: #ece8e1;
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 12px;
+            resize: vertical;
+            min-height: 40px;
         }
         .notes-input::placeholder {
             color: #7a8a9a;
         }
         .rating {
             display: flex;
-            gap: 5px;
+            gap: 3px;
+            flex-wrap: wrap;
         }
         .rating-btn {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border: 2px solid #ff4655;
             background: transparent;
             color: #ece8e1;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 11px;
             transition: all 0.2s;
         }
         .rating-btn:hover,
@@ -117,106 +160,152 @@
             background: #ff4655;
             color: white;
         }
+        .controls {
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        .control-btn {
+            padding: 12px 24px;
+            background: #ff4655;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .control-btn:hover {
+            background: #ff2e46;
+            transform: translateY(-2px);
+        }
+        .clear-btn {
+            background: #394b5a;
+        }
+        .clear-btn:hover {
+            background: #4a5c6b;
+        }
         @media (max-width: 600px) {
+            .deals-container {
+                grid-template-columns: 1fr;
+            }
             .check-actions {
                 flex-direction: column;
-                align-items: flex-start;
             }
-            .notes-input {
-                width: 100%;
+            .controls {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h2>⚡ ФАСТ-ЧЕК НА ЗАХОД В СДЕЛКУ</h2>
+    <div class="header">
+        <h1>⚡ ФАСТ-ЧЕК 10 СДЕЛОК</h1>
+    </div>
+
+    <div class="deals-container" id="dealsContainer">
+        <!-- Сделки будут добавляться здесь -->
+    </div>
+
+    <div class="controls">
+        <button class="control-btn" onclick="addDeal()">+ Добавить сделку</button>
+        <button class="control-btn clear-btn" onclick="clearLastDeal()">× Удалить последнюю</button>
+        <button class="control-btn clear-btn" onclick="clearAllDeals()">× Очистить все</button>
+    </div>
+</div>
+
+<script>
+let dealCount = 0;
+const deals = [];
+
+function addDeal() {
+    if (dealCount >= 10) return;
     
-    <div class="check-item">
-        <div class="check-number">1</div>
-        <div class="check-content">
-            <div class="check-question">Есть ли нарратив + формация на 15м/1ч?</div>
+    dealCount++;
+    const dealCard = document.createElement('div');
+    dealCard.className = 'deal-card';
+    dealCard.id = `deal-${dealCount}`;
+    dealCard.innerHTML = `
+        <button class="delete-btn" onclick="deleteDeal(${dealCount})">×</button>
+        <div class="deal-header">
+            <div class="deal-title">СДЕЛКА ${dealCount}</div>
+            <div class="deal-number">${dealCount}</div>
+        </div>
+        
+        <div class="check-item">
+            <div class="check-question">1. Есть ли нарратив + формация на 15м/1ч?</div>
             <div class="check-actions">
-                <div class="btn-group">
-                    <button class="btn" onclick="toggleSelection(this)">Да</button>
-                    <button class="btn" onclick="toggleSelection(this)">Нет</button>
-                </div>
-                <input type="text" class="notes-input" placeholder="Какая формация?">
+                <button class="btn" onclick="toggleSelection(this)">Да</button>
+                <button class="btn" onclick="toggleSelection(this)">Нет</button>
+            </div>
+            <div class="notes-container">
+                <textarea class="notes-input" placeholder="Какая формация?"></textarea>
             </div>
         </div>
-    </div>
 
-    <div class="check-item">
-        <div class="check-number">2</div>
-        <div class="check-content">
-            <div class="check-question">Есть ли трейды 100к+ и Natr 2+?</div>
+        <div class="check-item">
+            <div class="check-question">2. Если ли трейды 100к+ и Natr 2+?</div>
             <div class="check-actions">
-                <div class="btn-group">
-                    <button class="btn" onclick="toggleSelection(this)">Да</button>
-                    <button class="btn" onclick="toggleSelection(this)">Нет</button>
-                </div>
+                <button class="btn" onclick="toggleSelection(this)">Да</button>
+                <button class="btn" onclick="toggleSelection(this)">Нет</button>
+            </div>
+            <div class="notes-container">
+                <textarea class="notes-input" placeholder="Заметки..."></textarea>
             </div>
         </div>
-    </div>
 
-    <div class="check-item">
-        <div class="check-number">3</div>
-        <div class="check-content">
-            <div class="check-question">Находится ли зона в Premium/Discount?</div>
+        <div class="check-item">
+            <div class="check-question">3. Находиться ли зона в Premium/Discount?</div>
             <div class="check-actions">
-                <div class="btn-group">
-                    <button class="btn" onclick="toggleSelection(this)">Premium</button>
-                    <button class="btn" onclick="toggleSelection(this)">Discount</button>
-                    <button class="btn" onclick="toggleSelection(this)">Внутри</button>
-                </div>
+                <button class="btn" onclick="toggleSelection(this)">Premium</button>
+                <button class="btn" onclick="toggleSelection(this)">Discount</button>
+                <button class="btn" onclick="toggleSelection(this)">Внутри</button>
+            </div>
+            <div class="notes-container">
+                <textarea class="notes-input" placeholder="Заметки..."></textarea>
             </div>
         </div>
-    </div>
 
-    <div class="check-item">
-        <div class="check-number">4</div>
-        <div class="check-content">
-            <div class="check-question">Четкая зона для подбора и фиксации 15/5m?</div>
+        <div class="check-item">
+            <div class="check-question">4. Четкая зона для подбора и фиксации 15/5m?</div>
             <div class="check-actions">
-                <div class="btn-group">
-                    <button class="btn" onclick="toggleSelection(this)">Да</button>
-                    <button class="btn" onclick="toggleSelection(this)">Нет</button>
-                </div>
+                <button class="btn" onclick="toggleSelection(this)">Да</button>
+                <button class="btn" onclick="toggleSelection(this)">Нет</button>
+            </div>
+            <div class="notes-container">
+                <textarea class="notes-input" placeholder="Заметки..."></textarea>
             </div>
         </div>
-    </div>
 
-    <div class="check-item">
-        <div class="check-number">5</div>
-        <div class="check-content">
-            <div class="check-question">Есть ли риск ревард 1к3?</div>
+        <div class="check-item">
+            <div class="check-question">5. Есть ли риск ревард 1к3?</div>
             <div class="check-actions">
-                <div class="btn-group">
-                    <button class="btn" onclick="toggleSelection(this)">Да</button>
-                    <button class="btn" onclick="toggleSelection(this)">Нет</button>
-                </div>
+                <button class="btn" onclick="toggleSelection(this)">Да</button>
+                <button class="btn" onclick="toggleSelection(this)">Нет</button>
+            </div>
+            <div class="notes-container">
+                <textarea class="notes-input" placeholder="Заметки..."></textarea>
             </div>
         </div>
-    </div>
 
-    <div class="check-item">
-        <div class="check-number">6</div>
-        <div class="check-content">
-            <div class="check-question">В данной формации я буду входить от:</div>
+        <div class="check-item">
+            <div class="check-question">6. В данной формации я буду входить от:</div>
             <div class="check-actions">
-                <div class="btn-group">
-                    <button class="btn" onclick="toggleSelection(this)">A. 1го касания</button>
-                    <button class="btn" onclick="toggleSelection(this)">B. Свипа в зоне</button>
-                    <button class="btn" onclick="toggleSelection(this)">C. Выноса зоны</button>
-                </div>
+                <button class="btn" onclick="toggleSelection(this)">A. 1го касания</button>
+                <button class="btn" onclick="toggleSelection(this)">B. Свипа в зоне</button>
+                <button class="btn" onclick="toggleSelection(this)">C. Выноса зоны</button>
+            </div>
+            <div class="notes-container">
+                <textarea class="notes-input" placeholder="Заметки..."></textarea>
             </div>
         </div>
-    </div>
 
-    <div class="check-item">
-        <div class="check-number">7</div>
-        <div class="check-content">
-            <div class="check-question">Мое состояние по 10-балльной, делаю ли я это на эмоциях?</div>
+        <div class="check-item">
+            <div class="check-question">7. Мое состояние по 10-балльной, делаю ли я это на эмоциях?</div>
             <div class="check-actions">
                 <div class="rating">
                     <button class="rating-btn" onclick="toggleRating(this)">1</button>
@@ -231,30 +320,68 @@
                     <button class="rating-btn" onclick="toggleRating(this)">10</button>
                 </div>
             </div>
+            <div class="notes-container">
+                <textarea class="notes-input" placeholder="Заметки о состоянии..."></textarea>
+            </div>
         </div>
-    </div>
-</div>
+    `;
+    
+    document.getElementById('dealsContainer').appendChild(dealCard);
+    deals.push(dealCard);
+}
 
-<script>
+function deleteDeal(dealNumber) {
+    const deal = document.getElementById(`deal-${dealNumber}`);
+    if (deal) {
+        deal.remove();
+        dealCount--;
+        // Обновляем номера оставшихся сделок
+        updateDealNumbers();
+    }
+}
+
+function clearLastDeal() {
+    if (dealCount > 0) {
+        deleteDeal(dealCount);
+    }
+}
+
+function clearAllDeals() {
+    if (confirm('Точно очистить все сделки?')) {
+        document.getElementById('dealsContainer').innerHTML = '';
+        dealCount = 0;
+        deals.length = 0;
+    }
+}
+
+function updateDealNumbers() {
+    const dealCards = document.querySelectorAll('.deal-card');
+    dealCards.forEach((card, index) => {
+        const dealNumber = index + 1;
+        card.id = `deal-${dealNumber}`;
+        card.querySelector('.deal-title').textContent = `СДЕЛКА ${dealNumber}`;
+        card.querySelector('.deal-number').textContent = dealNumber;
+        card.querySelector('.delete-btn').setAttribute('onclick', `deleteDeal(${dealNumber})`);
+    });
+    dealCount = dealCards.length;
+}
+
 function toggleSelection(btn) {
-    // Снимаем выделение с других кнопок в группе
     const group = btn.parentElement;
     const buttons = group.querySelectorAll('.btn');
     buttons.forEach(b => b.classList.remove('selected'));
-    
-    // Выделяем текущую кнопку
     btn.classList.add('selected');
 }
 
 function toggleRating(btn) {
-    // Снимаем выделение со всех кнопок рейтинга
     const group = btn.parentElement;
     const buttons = group.querySelectorAll('.rating-btn');
     buttons.forEach(b => b.classList.remove('selected'));
-    
-    // Выделяем текущую кнопку
     btn.classList.add('selected');
 }
+
+// Добавляем первую сделку автоматически
+addDeal();
 </script>
 </body>
 </html>
